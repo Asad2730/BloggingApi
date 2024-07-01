@@ -1,8 +1,38 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/BloggingApi/src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/BloggingApi/tsconfig.app.json",
+    "assets": ["**/*.proto"],
+    "watchAssets": true
+  },
+  "monorepo": true,
+  "root": "apps/BloggingApi",
+  "projects": {
+    "BloggingApi": {
+      "type": "application",
+      "root": "apps/BloggingApi",
+      "entryFile": "main",
+      "sourceRoot": "apps/BloggingApi/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/BloggingApi/tsconfig.app.json",
+        "assets": ["**/*.proto"],
+        "watchAssets": true
+      }
+    },
+    "blog": {
+      "type": "application",
+      "root": "apps/blog",
+      "entryFile": "main",
+      "sourceRoot": "apps/blog/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/blog/tsconfig.app.json",
+        "assets": ["**/*.proto"],
+        "watchAssets": true
+      }
+    }
   }
 }

@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package blog;
+
+
+service BlogService {
+    rpc GetBlogs (Empty) returns (Blogs);
+    rpc GetBlog (Request_ID) returns (Blog);
+    rpc PostBlog (PostBlogDTO) returns (Blog);
+    rpc UpdateBlog (UpdateBlogDTO) returns (Response_MSG);
+    rpc DeleteBlog (Request_ID) returns (Response_MSG);
+}
+
+service AuthorService {
+    rpc GetAuthors (Empty) returns (Authors);
+    rpc GetAuthor (Request_ID) returns (Author);
+    rpc PostAuthor (PostAuthorDTO) returns (Author);
+    rpc UpdateAuthor (UpdateAuthorDTO) returns (Response_MSG);
+    rpc DeleteAuthor (Request_ID) returns (Response_MSG);
+}
+
+
+message Request_ID {
+    int32 id = 1;
+}
+
+message Response_MSG {
+    string msg = 1;
+}
+
+message Blog {
+    int32 id = 1;
+    int32 author_id = 2;
+    string title = 3;
+    string summary = 4;
+    string content = 5;
+   
+}
+
+message Blogs {
+    repeated Blog Blog = 1;
+}
+
+message PostBlogDTO{
+    string title = 1;
+    string summary = 2;
+    string content = 3;
+    int32 author_id = 4;
+}
+
+message UpdateBlogDTO{
+    int32 id = 1;
+    string title = 2;
+    string summary = 3;
+    string content = 4;
+}
+
+
+message Author {
+   int32 id = 1;
+   string name = 2;
+   string email = 3; 
+}
+
+
+message Authors {
+    repeated Author Author = 1;
+}
+
+
+message PostAuthorDTO {
+    string name = 1;
+    string email = 2;
+}
+
+message UpdateAuthorDTO {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+
+message Empty {}
