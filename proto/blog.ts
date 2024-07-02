@@ -80,6 +80,16 @@ export interface BlogServiceClient {
   updateBlog(request: UpdateBlogDTO): Observable<ResponseMSG>;
 
   deleteBlog(request: RequestID): Observable<ResponseMSG>;
+
+  getAuthors(request: Empty): Observable<Authors>;
+
+  getAuthor(request: RequestID): Observable<Author>;
+
+  postAuthor(request: PostAuthorDTO): Observable<Author>;
+
+  updateAuthor(request: UpdateAuthorDTO): Observable<ResponseMSG>;
+
+  deleteAuthor(request: RequestID): Observable<ResponseMSG>;
 }
 
 export interface BlogServiceController {
@@ -92,11 +102,32 @@ export interface BlogServiceController {
   updateBlog(request: UpdateBlogDTO): Promise<ResponseMSG> | Observable<ResponseMSG> | ResponseMSG;
 
   deleteBlog(request: RequestID): Promise<ResponseMSG> | Observable<ResponseMSG> | ResponseMSG;
+
+  getAuthors(request: Empty): Promise<Authors> | Observable<Authors> | Authors;
+
+  getAuthor(request: RequestID): Promise<Author> | Observable<Author> | Author;
+
+  postAuthor(request: PostAuthorDTO): Promise<Author> | Observable<Author> | Author;
+
+  updateAuthor(request: UpdateAuthorDTO): Promise<ResponseMSG> | Observable<ResponseMSG> | ResponseMSG;
+
+  deleteAuthor(request: RequestID): Promise<ResponseMSG> | Observable<ResponseMSG> | ResponseMSG;
 }
 
 export function BlogServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["getBlogs", "getBlog", "postBlog", "updateBlog", "deleteBlog"];
+    const grpcMethods: string[] = [
+      "getBlogs",
+      "getBlog",
+      "postBlog",
+      "updateBlog",
+      "deleteBlog",
+      "getAuthors",
+      "getAuthor",
+      "postAuthor",
+      "updateAuthor",
+      "deleteAuthor",
+    ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("BlogService", method)(constructor.prototype[method], method, descriptor);
@@ -110,44 +141,3 @@ export function BlogServiceControllerMethods() {
 }
 
 export const BLOG_SERVICE_NAME = "BlogService";
-
-export interface AuthorServiceClient {
-  getAuthors(request: Empty): Observable<Authors>;
-
-  getAuthor(request: RequestID): Observable<Author>;
-
-  postAuthor(request: PostAuthorDTO): Observable<Author>;
-
-  updateAuthor(request: UpdateAuthorDTO): Observable<ResponseMSG>;
-
-  deleteAuthor(request: RequestID): Observable<ResponseMSG>;
-}
-
-export interface AuthorServiceController {
-  getAuthors(request: Empty): Promise<Authors> | Observable<Authors> | Authors;
-
-  getAuthor(request: RequestID): Promise<Author> | Observable<Author> | Author;
-
-  postAuthor(request: PostAuthorDTO): Promise<Author> | Observable<Author> | Author;
-
-  updateAuthor(request: UpdateAuthorDTO): Promise<ResponseMSG> | Observable<ResponseMSG> | ResponseMSG;
-
-  deleteAuthor(request: RequestID): Promise<ResponseMSG> | Observable<ResponseMSG> | ResponseMSG;
-}
-
-export function AuthorServiceControllerMethods() {
-  return function (constructor: Function) {
-    const grpcMethods: string[] = ["getAuthors", "getAuthor", "postAuthor", "updateAuthor", "deleteAuthor"];
-    for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcMethod("AuthorService", method)(constructor.prototype[method], method, descriptor);
-    }
-    const grpcStreamMethods: string[] = [];
-    for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcStreamMethod("AuthorService", method)(constructor.prototype[method], method, descriptor);
-    }
-  };
-}
-
-export const AUTHOR_SERVICE_NAME = "AuthorService";

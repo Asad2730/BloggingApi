@@ -5,9 +5,8 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/BloggingApi/tsconfig.app.json",
-    "assets": ["**/*.proto"],
-    "watchAssets": true
+    "tsConfigPath": "apps/BloggingApi/tsconfig.app.json"
+   
   },
   "monorepo": true,
   "root": "apps/BloggingApi",
@@ -18,9 +17,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/BloggingApi/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/BloggingApi/tsconfig.app.json",
-        "assets": ["**/*.proto"],
-        "watchAssets": true
+        "tsConfigPath": "apps/BloggingApi/tsconfig.app.json"
+       
       }
     },
     "blog": {
@@ -29,9 +27,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/blog/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/blog/tsconfig.app.json",
-        "assets": ["**/*.proto"],
-        "watchAssets": true
+        "tsConfigPath": "apps/blog/tsconfig.app.json"
+       
       }
     }
   }

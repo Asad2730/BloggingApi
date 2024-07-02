@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {
   Blogs, RequestID, Blog, PostBlogDTO, UpdateBlogDTO, ResponseMSG, Authors,
   Author, PostAuthorDTO, UpdateAuthorDTO
-} from '../blog';
+} from '../../../proto/blog';
 
 @Injectable()
 export class BlogService {

@@ -1,10 +1,10 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import {
-  AUTHOR_SERVICE_NAME, BLOG_PACKAGE_NAME, BlogServiceClient, AuthorServiceClient, PostBlogDTO, UpdateBlogDTO,
-   PostAuthorDTO, RequestID, UpdateAuthorDTO
-} from '../blog';
+   BLOG_PACKAGE_NAME, BlogServiceClient, PostBlogDTO, UpdateBlogDTO,
+   PostAuthorDTO, RequestID, UpdateAuthorDTO,BLOG_SERVICE_NAME
+} from '../../../proto/blog';
 import { ClientGrpc } from '@nestjs/microservices';
-import { BLOG_SERVICE_NAME } from 'proto/blog';
+
 
 
 
@@ -12,13 +12,12 @@ import { BLOG_SERVICE_NAME } from 'proto/blog';
 export class AppService implements OnModuleInit {
 
   private blogService: BlogServiceClient
-  private authorService: AuthorServiceClient
+
 
   constructor(@Inject(BLOG_PACKAGE_NAME) private client: ClientGrpc) { }
 
   onModuleInit() {
     this.blogService = this.client.getClientByServiceName<BlogServiceClient>(BLOG_SERVICE_NAME)
-    this.authorService = this.client.getClientByServiceName<AuthorServiceClient>(AUTHOR_SERVICE_NAME)
   }
 
   getBlogs() {
@@ -40,19 +39,19 @@ export class AppService implements OnModuleInit {
 
 
   getAuthors() {
-    return this.authorService.getAuthors({})
+    return this.blogService.getAuthors({})
   }
   getAuthor(request: RequestID) {
-    return this.authorService.getAuthor(request)
+    return this.blogService.getAuthor(request)
   }
   postAuthor(request: PostAuthorDTO) {
-    return this.authorService.postAuthor(request)
+    return this.blogService.postAuthor(request)
   }
   updateAuthor(request: UpdateAuthorDTO) {
-    return this.authorService.updateAuthor(request)
+    return this.blogService.updateAuthor(request)
   }
   deleteAuthor(request: RequestID) {
-    return this.authorService.deleteAuthor(request)
+    return this.blogService.deleteAuthor(request)
   }
 
 }

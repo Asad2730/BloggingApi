@@ -1,17 +1,16 @@
 import { Controller } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import {
-  Author, AuthorServiceController, Blog, Authors, BlogServiceController, Blogs, PostBlogDTO,
+  Author, Blog, Authors, BlogServiceController, Blogs, PostBlogDTO,
   UpdateBlogDTO, PostAuthorDTO, RequestID, ResponseMSG, UpdateAuthorDTO,
-  AUTHOR_SERVICE_NAME,
   BLOG_SERVICE_NAME
-} from '../blog';
+} from '../../../proto/blog';
 
 import { GrpcMethod } from '@nestjs/microservices';
 
 
 @Controller()
-export class BlogController implements BlogServiceController, AuthorServiceController {
+export class BlogController implements BlogServiceController {
 
   constructor(private readonly blogService: BlogService) { }
 
@@ -46,27 +45,27 @@ export class BlogController implements BlogServiceController, AuthorServiceContr
 
 
 
-  @GrpcMethod(AUTHOR_SERVICE_NAME, 'getAuthors')
+  @GrpcMethod(BLOG_SERVICE_NAME, 'getAuthors')
   getAuthors(): Authors | Promise<Authors> {
     return this.blogService.getAuthors();
   }
 
-  @GrpcMethod(AUTHOR_SERVICE_NAME, 'getAuthor')
+  @GrpcMethod(BLOG_SERVICE_NAME, 'getAuthor')
   getAuthor(request: RequestID): Author | Promise<Author> {
     return this.blogService.getAuthor(request);
   }
 
-  @GrpcMethod(AUTHOR_SERVICE_NAME, 'postAuthor')
+  @GrpcMethod(BLOG_SERVICE_NAME, 'postAuthor')
   postAuthor(request: PostAuthorDTO): Author | Promise<Author> {
     return this.blogService.postAuthor(request);
   }
 
-  @GrpcMethod(AUTHOR_SERVICE_NAME, 'updateAuthor')
+  @GrpcMethod(BLOG_SERVICE_NAME, 'updateAuthor')
   updateAuthor(request: UpdateAuthorDTO): ResponseMSG | Promise<ResponseMSG> {
     return this.blogService.updateAuthor(request);
   }
 
-  @GrpcMethod(AUTHOR_SERVICE_NAME, 'deleteAuthor')
+  @GrpcMethod(BLOG_SERVICE_NAME, 'deleteAuthor')
   deleteAuthor(request: RequestID): ResponseMSG | Promise<ResponseMSG> {
     return this.blogService.deleteAuthor(request);
   }

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { AppService } from './app.service';
-import { RequestID, PostBlogDTO, UpdateBlogDTO, PostAuthorDTO, UpdateAuthorDTO } from '../blog';
+import { RequestID, PostBlogDTO, UpdateBlogDTO, PostAuthorDTO, UpdateAuthorDTO } from '../../../proto/blog';
 
 @Controller()
 export class AppController {

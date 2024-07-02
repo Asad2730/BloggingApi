@@ -9,16 +9,13 @@ service BlogService {
     rpc PostBlog (PostBlogDTO) returns (Blog);
     rpc UpdateBlog (UpdateBlogDTO) returns (Response_MSG);
     rpc DeleteBlog (Request_ID) returns (Response_MSG);
-}
 
-service AuthorService {
     rpc GetAuthors (Empty) returns (Authors);
     rpc GetAuthor (Request_ID) returns (Author);
     rpc PostAuthor (PostAuthorDTO) returns (Author);
     rpc UpdateAuthor (UpdateAuthorDTO) returns (Response_MSG);
     rpc DeleteAuthor (Request_ID) returns (Response_MSG);
 }
-
 
 message Request_ID {
     int32 id = 1;
